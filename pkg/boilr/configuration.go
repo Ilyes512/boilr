@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/tmrts/boilr/pkg/util/exit"
-	"github.com/tmrts/boilr/pkg/util/osutil"
+	"github.com/Ilyes512/boilr/pkg/util/exit"
+	"github.com/Ilyes512/boilr/pkg/util/osutil"
 )
 
 const (

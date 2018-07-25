@@ -114,54 +114,10 @@ func (t *dirTemplate) UseDefaultValues() {
 
 func (t *dirTemplate) BindPrompts() {
 	for parentKey := range t.Context {
-		if childMap, ok := t.Context[parentKey].(map[string]interface{}); ok {
-			advancedMode := prompt.New(parentKey, false)
-
-			for childKey := range childMap {
-				if t.ShouldUseDefaults {
-					t.FuncMap[childKey] = func(val interface{}) func() interface{} {
-						return func() interface{} {
-							switch val := val.(type) {
-							// First is the default value if it's a slice
-							case []interface{}:
-								return val[0]
-							}
-
-							return val
-						}
-					}(childMap[childKey])
-				} else {
-					childPrompt := prompt.New(childKey, childMap[childKey])
-
-					t.FuncMap[childKey] = func(val interface{}, p func() interface{}) func() interface{} {
-						return func() interface{} {
-							if isAdvanced := advancedMode().(bool); isAdvanced {
-								return p()
-							}
-
-							return val
-						}
-					}(t.Context[parentKey], childPrompt)
-				}
-			}
-
-			continue
-		}
-
 		if t.ShouldUseDefaults {
-			t.FuncMap[parentKey] = func(val interface{}) func() interface{} {
-				return func() interface{} {
-					switch val := val.(type) {
-					// First is the default value if it's a slice
-					case []interface{}:
-						return val[0]
-					}
-
-					return val
-				}
-			}(t.Context[parentKey])
+			handleBindDefaults(t, parentKey)
 		} else {
-			t.FuncMap[parentKey] = prompt.New(parentKey, t.Context[parentKey])
+			handleBindPrompts(t, parentKey)
 		}
 	}
 }
@@ -261,4 +217,69 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 
 		return nil
 	})
+}
+
+func handleBindDefaults(t *dirTemplate, parentKey string) {
+	if childMap, ok := t.Context[parentKey].(map[string]interface{}); ok {
+		if len(childMap) > 0 {
+			t.FuncMap[parentKey] = func() bool { return false }
+		}
+
+		for childKey := range childMap {
+
+			t.FuncMap[childKey] = func(val interface{}) func() interface{} {
+				return func() interface{} {
+					switch val := val.(type) {
+					// First is the default value if it's a slice
+					case []interface{}:
+						return val[0]
+					}
+
+					return val
+				}
+			}(childMap[childKey])
+		}
+	} else {
+		t.FuncMap[parentKey] = func(val interface{}) func() interface{} {
+			return func() interface{} {
+				switch val := val.(type) {
+				// First is the default value if it's a slice
+				case []interface{}:
+					return val[0]
+				}
+
+				return val
+			}
+		}(t.Context[parentKey])
+	}
+}
+
+func handleBindPrompts(t *dirTemplate, parentKey string) {
+	if childMap, ok := t.Context[parentKey].(map[string]interface{}); ok {
+		advancedMode := prompt.New(parentKey, false)
+
+		if len(childMap) > 0 {
+			t.FuncMap[parentKey] = func(a func() interface{}) func() interface{} {
+				return func() interface{} {
+					return advancedMode()
+				}
+			}(advancedMode)
+		}
+
+		for childKey := range childMap {
+			childPrompt := prompt.New(childKey, childMap[childKey])
+
+			t.FuncMap[childKey] = func(val interface{}, p func() interface{}) func() interface{} {
+				return func() interface{} {
+					if isAdvanced := advancedMode().(bool); isAdvanced {
+						return p()
+					}
+
+					return val
+				}
+			}(t.Context[parentKey], childPrompt)
+		}
+	} else {
+		t.FuncMap[parentKey] = prompt.New(parentKey, t.Context[parentKey])
+	}
 }
