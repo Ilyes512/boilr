@@ -39,6 +39,13 @@ You can download them directly or run the installation script.
 
 Please see [Installation](https://github.com/Ilyes512/boilr/wiki/Installation) page for more information.
 
+## Homebrew (MacOS)
+
+```bash
+brew tap Ilyes512/boilr
+brew install Ilyes512/boilr
+```
+
 # Getting Started with Boilr
 Use `boilr help` to get the list of available commands.
 
