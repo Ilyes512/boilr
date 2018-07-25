@@ -5,7 +5,7 @@ Boilr
 <br>
 <a href="https://travis-ci.com/Ilyes512/boilr"><img alt="Build Status" src="https://img.shields.io/travis/com/Ilyes512/boilr.svg?style=flat-square" /></a>
 <a href="https://github.com/Ilyes512/boilr/blob/master/LICENSE" ><img alt="License" src="https://img.shields.io/badge/license-Apache%20License%202.0-E91E63.svg?style=flat-square"/></a>
-<a href="https://github.com/Ilyes512/boilr/releases" ><img alt="Release Version" src="https://img.shields.io/badge/release-v0.4.0-blue.svg?style=flat-square"/></a>
+<a href="https://github.com/Ilyes512/boilr/releases" ><img alt="Release Version" src="https://img.shields.io/badge/release-v0.4.1-blue.svg?style=flat-square"/></a>
 <a href="http://goreportcard.com/report/Ilyes512/boilr" ><img alt="Code Quality" src="https://img.shields.io/badge/report%20card-A%2B-F44336.svg?style=flat-square"/></a>
 <a href="https://godoc.org/github.com/Ilyes512/boilr" ><img alt="Documentation" src="https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square"/></a>
 </h1>
