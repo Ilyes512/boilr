@@ -27,3 +27,8 @@ deploy:
     repo: Ilyes512/boilr
     branch: master
     tags: true
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
