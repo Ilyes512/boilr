@@ -24,6 +24,6 @@ deploy:
     - boilr-$VERSION-linux_amd64.tgz
   skip_cleanup: true
   on:
-    repo: tmrts/boilr
+    repo: Ilyes512/boilr
     branch: master
     tags: true
