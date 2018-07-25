@@ -1,4 +1,4 @@
-package: github.com/tmrts/boilr
+package: github.com/Ilyes512/boilr
 import:
 - package: github.com/spf13/cobra
 - package: github.com/docker/go-units

@@ -90,7 +90,7 @@ download() {
     return
   fi
 
-  local url=https://github.com/tmrts/boilr/releases/download/$version/${1}.tgz
+  local url=https://github.com/Ilyes512/boilr/releases/download/$version/${1}.tgz
   if which curl > /dev/null; then
     curl -fL $url | tar -xz
   elif which wget > /dev/null; then
@@ -126,5 +126,5 @@ Completed installation
 
 Boilr executable is installed to ~/bin/boilr
 
-For more information, see: https://github.com/tmrts/boilr
+For more information, see: https://github.com/Ilyes512/boilr
 EOF
