@@ -221,6 +221,10 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 
 func handleBindDefaults(t *dirTemplate, parentKey string) {
 	if childMap, ok := t.Context[parentKey].(map[string]interface{}); ok {
+		if len(childMap) > 0 {
+			t.FuncMap[parentKey] = func() bool { return false }
+		}
+
 		for childKey := range childMap {
 
 			t.FuncMap[childKey] = func(val interface{}) func() interface{} {
@@ -253,6 +257,14 @@ func handleBindDefaults(t *dirTemplate, parentKey string) {
 func handleBindPrompts(t *dirTemplate, parentKey string) {
 	if childMap, ok := t.Context[parentKey].(map[string]interface{}); ok {
 		advancedMode := prompt.New(parentKey, false)
+
+		if len(childMap) > 0 {
+			t.FuncMap[parentKey] = func(a func() interface{}) func() interface{} {
+				return func() interface{} {
+					return advancedMode()
+				}
+			}(advancedMode)
+		}
 
 		for childKey := range childMap {
 			childPrompt := prompt.New(childKey, childMap[childKey])
