@@ -12,6 +12,7 @@ import (
 	"github.com/Ilyes512/boilr/pkg/template"
 	"github.com/Ilyes512/boilr/pkg/util/exit"
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
+	"github.com/Ilyes512/boilr/pkg/util/tlog"
 	"github.com/Ilyes512/boilr/pkg/util/validate"
 )
 
@@ -38,6 +39,8 @@ var Use = &cli.Command{
 		})
 
 		MustValidateTemplateDir()
+
+		tlog.SetLogLevel(GetStringFlag(cmd, "log-level"))
 
 		tmplName := args[0]
 		targetDir, err := filepath.Abs(args[1])
