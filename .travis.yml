@@ -3,7 +3,7 @@ sudo: false
 matrix:
   include:
   - go: 1.x
-    env: VERSION=0.4.1
+    env: VERSION=0.4.2
 
 before_deploy:
 - GOARCH=amd64 GOOS=linux CGO_ENABLED=0 go build boilr.go  && tar czvf boilr-$VERSION-linux_amd64.tgz boilr
@@ -15,7 +15,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: yZlNku47CwznJ2N1kXNCLRCEj3EZkKlQv4l5KSyCPSMk2SKBAHUcHfvbj8ICVYer1OxMLQ0W8nsD9OR6GeGlMr8AioujGUzNDafNRB9Skr1444H9vjEFUrXsMbtPd3zJIMc1l3CkeQyafq9/zQaUGvDB/vGpTy5rjM2YvI46r3H4MsSeMOaJrynV2oxCgvdKsABcdEyulBYhStYzaxC02sJen3WOFa0yzXX56XcM92TNFr936hDrwm1Pn8/YhhOdniARppCsvnZg/PnIgZYJDg4s3+uCtLEkyNcuPMK7URZpTW/3Z2etto+1RBr7Ooc9hU1tb6JKMmZfzq+1f4xryn9eg15N9KPAVqYoLiugg22ZYCR7UcxpMiRUg8ZUvX7TZ+0chZHxSuR+UZHlgL8nQFlrpjD03TxEmzZtdF29dbEgwebEMpWgNgnXU2oEHcr99mu3ciNcSAqsmNlCnB9CWnj3LvX1oZabrbNPBh8Hp56B8yghcTfRXJZvNPKgyq4+epZcErZmSOdHE9fmMO05Vnh31u0uin7lXqUpNR+P2j/qolauhd3CLTeg4bYL2X3hM69Zwe+mJGdRc4XgkoJAWWRmP8IGjQLG6P15AFGLmgVYiplorZVO3SIKxinDGzzJHTuHFGXs1nl+cACiMcAofEobR9zchorFu7PSDUqziAU=
+    secure: eAteyECZcUu3twjlO50Zvz2tU//9j3OOXYh6FQEAyF8R1BqtsyojoFm3hj6RqjaehNn/w4aA+icXn+vCp5fp4c3waodOqOgy5zUH+c/mca6XYOX1LOGKVfNvdn1500t33YVNL/df0VcpZRDDWggJEeoyF15EE4rx6tVQEsQ3ffeWO3gGgD28373JSxXuZf+cuYtrL3H2DYTWc2D58jI6W3PnrbHACcEd4ULvGxNc0TeciJiRTQADTYzxxmr4C2DlVbtQaUGgMImQ/S1woOGmePquwkH8MihnWeIA9+GlmZhrXi807x7SbaR2Hqkz7jWJhtdS0cicXotdRoVGNYsOgCuH4oJDedEVQK1CdmQgJWhxToWkBua6Jkvukx7HpVBp/4Ggv4eCskjF2A55tC1MBX3BglwZAPXdwtck2J5nb4BVXUrYEIk+KLBficm3FiCLiLnpqC4h4btlprK+4qfrS0/KSgcRefskBh4WPRe4Xw+8OaJILGPxw4WVbSMFOvSZqorxv89aek+QCukQZC6VIR9trrAKUa0smtKLsxq9tr+AgY5gSirum4fu/OcdvangF3JxO5E5d1eSBDg1W1/vXySkpmHQsr46/i49pHoKINOkhgxOtHIKJF7Zg5PQNkYKDqfr2Egmi1EWId5Nv3DVAp+igI8gXbrNy0G0a9+nLhQ=
   file:
     - install
     - boilr-$VERSION-darwin_386.tgz
