@@ -20,7 +20,7 @@ var Download = &cli.Command{
 	Use:   "download <template-repo> <template-tag>",
 	Short: "Download a project template from a github repository to template registry",
 	// FIXME Half-Updates leave messy templates
-	Run: func(c *cli.Command, args []string) {
+	Run: func(cmd *cli.Command, args []string) {
 		MustValidateArgs(args, []validate.Argument{
 			{"template-repo", validate.UnixPath},
 			{"template-tag", validate.AlphanumericExt},
@@ -41,7 +41,7 @@ var Download = &cli.Command{
 		case err != nil:
 			exit.Error(fmt.Errorf("download: %s", err))
 		case exists:
-			if shouldOverwrite := GetBoolFlag(c, "force"); !shouldOverwrite {
+			if shouldOverwrite := GetBoolFlag(cmd, "force"); !shouldOverwrite {
 				exit.OK("Template %v already exists use -f to overwrite the template", templateName)
 			}
 
