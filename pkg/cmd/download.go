@@ -11,6 +11,7 @@ import (
 	"github.com/Ilyes512/boilr/pkg/util/exit"
 	"github.com/Ilyes512/boilr/pkg/util/git"
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
+	"github.com/Ilyes512/boilr/pkg/util/tlog"
 	"github.com/Ilyes512/boilr/pkg/util/validate"
 )
 
@@ -26,6 +27,8 @@ var Download = &cli.Command{
 		})
 
 		MustValidateTemplateDir()
+
+		tlog.SetLogLevel(GetStringFlag(cmd, "log-level"))
 
 		templateURL, templateName := args[0], args[1]
 
