@@ -20,8 +20,6 @@ var (
 		// TODO GET, POST utilities
 		// TODO Hostname(Also accesible through $HOSTNAME), interface IP addr, etc.
 		// TODO add validate for custom regex and expose validate package
-		"env":      os.Getenv,
-		"time":     CurrentTimeInFmt,
 		"hostname": func() string { return os.Getenv("HOSTNAME") },
 		"username": func() string {
 			t, err := user.Current()
@@ -84,16 +82,7 @@ var (
 		},
 
 		// String utilities
-		"toLower": strings.ToLower,
-		"toUpper": strings.ToUpper,
 		"toTitle": strings.ToTitle,
-		"title":   strings.Title,
-
-		"trimSpace":  strings.TrimSpace,
-		"trimPrefix": strings.TrimPrefix,
-		"trimSuffix": strings.TrimSuffix,
-
-		"repeat": strings.Repeat,
 	}
 
 	// Options contain the default options for the template execution.
