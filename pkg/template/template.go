@@ -203,6 +203,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			contentsTmpl := template.Must(template.
 				New("file contents template").
 				Option(Options...).
+				Funcs(sprig.TxtFuncMap()).
 				Funcs(FuncMap).
 				ParseFiles(filename))
 
@@ -228,7 +229,6 @@ func handleBindDefaults(t *dirTemplate, parentKey string) {
 		}
 
 		for childKey := range childMap {
-
 			t.FuncMap[childKey] = func(val interface{}) func() interface{} {
 				return func() interface{} {
 					switch val := val.(type) {
