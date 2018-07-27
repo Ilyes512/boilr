@@ -96,7 +96,7 @@ var (
 			generator, err := password.NewGenerator(&password.GeneratorInput{Symbols: customSymbols})
 
 			if err != nil {
-				return fmt.Sprintf("failed to generate password generator", err)
+				return fmt.Sprintf("failed to generate password generator: %s", err)
 			}
 
 			res, err := generator.Generate(length, numDigits, numSymbols, noUpper, allowRepeat)
