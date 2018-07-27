@@ -1,6 +1,8 @@
 package template
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"fmt"
 	"os"
 	"os/user"
@@ -94,6 +96,18 @@ var (
 			}
 
 			return res
+		},
+
+		// generate a random base64 string based on random bytes of length n
+		"randomBase64": func(length int) string {
+			b := make([]byte, length)
+			_, err := rand.Read(b)
+
+			if err != nil {
+				return fmt.Sprintf("failed to generate randomBase64: %s", err)
+			}
+
+			return base64.StdEncoding.EncodeToString(b)
 		},
 	}
 
