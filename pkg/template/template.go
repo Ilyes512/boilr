@@ -14,6 +14,7 @@ import (
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
 	"github.com/Ilyes512/boilr/pkg/util/stringutil"
 	"github.com/Ilyes512/boilr/pkg/util/tlog"
+	"github.com/Masterminds/sprig"
 )
 
 // Interface is contains the behavior of boilr templates.
@@ -151,6 +152,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 		fnameTmpl := template.Must(template.
 			New("file name template").
 			Option(Options...).
+			Funcs(sprig.TxtFuncMap()).
 			Funcs(FuncMap).
 			Parse(oldName))
 
