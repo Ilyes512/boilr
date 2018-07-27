@@ -123,6 +123,12 @@
   version = "v1.0.0"
 
 [[projects]]
+  name = "github.com/sethvargo/go-password"
+  packages = ["password"]
+  revision = "d207206009266fab3e355f1a0488b47ac24139c7"
+  version = "v0.1.1"
+
+[[projects]]
   name = "github.com/spf13/cobra"
   packages = ["."]
   revision = "ef82de70bb3f60c65fb8eebacbb2d122ef517385"
@@ -272,6 +278,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "cf158f5c12b7cf32043e6833f66da1abdc331f986488671f98fc2966fd0f21d7"
+  inputs-digest = "3576cbb8d87be3836a732edf0367c8f6c48ef39900a3e07df6a47b317ea3f21f"
   solver-name = "gps-cdcl"
   solver-version = 1

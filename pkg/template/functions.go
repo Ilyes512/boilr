@@ -9,6 +9,8 @@ import (
 	"strings"
 	"text/template"
 	"time"
+
+	"github.com/sethvargo/go-password/password"
 )
 
 var (
@@ -83,6 +85,16 @@ var (
 
 		// String utilities
 		"toTitle": strings.ToTitle,
+
+		// password.Generate(length, numDigits, numSymbols int, noUpper, allowRepeat bool) (string, error)
+		"password": func(length, numDigits, numSymbols int, noUpper, allowRepeat bool) string {
+			res, err := password.Generate(length, numDigits, numSymbols, noUpper, allowRepeat)
+			if err != nil {
+				return fmt.Sprintf("failed to generate password: %s", err)
+			}
+
+			return res
+		},
 	}
 
 	// Options contain the default options for the template execution.

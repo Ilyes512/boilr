@@ -45,6 +45,14 @@
   name = "gopkg.in/src-d/go-git.v4"
   version = "4.5.0"
 
+[[constraint]]
+  name = "github.com/Masterminds/sprig"
+  version = "2.15.0"
+
+[[constraint]]
+  name = "github.com/sethvargo/go-password"
+  version = "0.1.1"
+
 [prune]
   go-tests = true
   unused-packages = true
