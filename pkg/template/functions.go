@@ -16,6 +16,9 @@ import (
 )
 
 var (
+	// custom symbols: removed \ and "
+	customSymbols = "~!@#$%^&*()_+`-={}|[]:<>?,./"
+
 	// FuncMap contains the functions exposed to templating engine.
 	FuncMap = template.FuncMap{
 		// TODO confirmation prompt
@@ -90,7 +93,13 @@ var (
 
 		// password.Generate(length, numDigits, numSymbols int, noUpper, allowRepeat bool) (string, error)
 		"password": func(length, numDigits, numSymbols int, noUpper, allowRepeat bool) string {
-			res, err := password.Generate(length, numDigits, numSymbols, noUpper, allowRepeat)
+			generator, err := password.NewGenerator(&password.GeneratorInput{Symbols: customSymbols})
+
+			if err != nil {
+				return fmt.Sprintf("failed to generate password generator", err)
+			}
+
+			res, err := generator.Generate(length, numDigits, numSymbols, noUpper, allowRepeat)
 			if err != nil {
 				return fmt.Sprintf("failed to generate password: %s", err)
 			}
