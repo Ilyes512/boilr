@@ -43,7 +43,7 @@ Please see [Installation](https://github.com/Ilyes512/boilr/wiki/Installation) p
 
 ```bash
 brew tap Ilyes512/boilr
-brew install Ilyes512/boilr
+brew install Ilyes512/boilr/boilr
 ```
 
 # Getting Started with Boilr
