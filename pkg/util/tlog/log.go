@@ -135,9 +135,12 @@ func Fatal(msg string) {
 
 // Prompt outputs the given message as a question along with a default value.
 func Prompt(msg string, defval interface{}) {
+	whiteBold := color.New(color.Bold, color.FgWhite).SprintFunc()
+	blueBold := color.New(color.Bold, color.FgBlue).SprintFunc()
+
 	tokens := []string{
 		color.New(color.FgBlue).SprintFunc()("[" + QuestionMark + "]"),
-		color.New(color.Bold, color.FgWhite).SprintFunc()(msg),
+		whiteBold(msg),
 	}
 
 	// TODO refactor & eliminate duplication
@@ -145,14 +148,20 @@ func Prompt(msg string, defval interface{}) {
 	case []interface{}:
 		tokens = append(tokens, "\n")
 		for i, v := range val {
-			tokens = append(tokens, color.New(color.Bold, color.FgWhite).SprintFunc()(fmt.Sprintf("   %v - %#v\n", i+1, v)))
+			tokens = append(tokens, whiteBold(fmt.Sprintf("   %v - %#v\n", i+1, v)))
 		}
 
-		tokens = append(tokens, color.New(color.Bold, color.FgWhite).SprintFunc()(fmt.Sprintf("   Choose from %v..%v", 1, len(val))))
+		tokens = append(tokens, whiteBold(fmt.Sprintf("   Choose from %v..%v", 1, len(val))))
+		tokens = append(tokens, blueBold(fmt.Sprintf("[default: %v]: ", 1)))
+	case bool:
+		boolText := "no"
+		if defval == true {
+			boolText = "yes"
+		}
 
-		tokens = append(tokens, color.New(color.Bold, color.FgBlue).SprintFunc()(fmt.Sprintf("[default: %v]: ", 1)))
+		tokens = append(tokens, blueBold(fmt.Sprintf("[default: %s]: ", boolText)))
 	default:
-		tokens = append(tokens, color.New(color.Bold, color.FgBlue).SprintFunc()(fmt.Sprintf("[default: %#v]: ", defval)))
+		tokens = append(tokens, blueBold(fmt.Sprintf("[default: %#v]: ", defval)))
 	}
 
 	fmt.Print(strings.Join(tokens, " "))
