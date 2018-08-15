@@ -279,7 +279,7 @@ func handleBindPrompts(t *dirTemplate, parentKey string) {
 
 					return val
 				}
-			}(t.Context[parentKey], childPrompt)
+			}(childMap[childKey], childPrompt)
 		}
 	} else {
 		t.FuncMap[parentKey] = prompt.New(parentKey, t.Context[parentKey])
