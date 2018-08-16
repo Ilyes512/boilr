@@ -57,7 +57,7 @@ var (
 )
 
 func (p boolPrompt) EvaluateChoice(c string) (interface{}, error) {
-	if val, ok := booleanValues[c]; ok {
+	if val, ok := booleanValues[strings.ToLower(c)]; ok {
 		return val, nil
 	}
 
