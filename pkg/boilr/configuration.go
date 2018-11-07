@@ -37,7 +37,7 @@ const (
 	TemplateMetadataName = "__metadata.json"
 
 	// GithubOwner is the owner of the github repository
-	GithubOwner = "tmrts"
+	GithubOwner = "ilyes512"
 
 	// GithubRepo is the name of the github repository
 	GithubRepo = "boilr"
