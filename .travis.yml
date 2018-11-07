@@ -1,19 +1,25 @@
 language: go
 sudo: false
-matrix:
-  include:
-  - go: 1.x
-    env: VERSION=0.4.4
 
-before_deploy:
-- GOARCH=amd64 GOOS=linux CGO_ENABLED=0 go build boilr.go  && tar czvf boilr-$VERSION-linux_amd64.tgz boilr
-- GOARCH=386   GOOS=linux CGO_ENABLED=0 go build boilr.go  && tar czvf boilr-$VERSION-linux_386.tgz boilr
+go:
+  - 1.11.x
 
-- GOARCH=amd64 GOOS=darwin CGO_ENABLED=0 go build boilr.go && tar czvf boilr-$VERSION-darwin_amd64.tgz boilr
-- GOARCH=386   GOOS=darwin CGO_ENABLED=0 go build boilr.go && tar czvf boilr-$VERSION-darwin_386.tgz boilr
+env:
+  global:
+    - CGO_ENABLED=0
+    - GO111MODULE=on
+    - VERSION=0.4.4
+
+script:
+  - go test
+  - GOARCH=amd64 GOOS=linux  go build boilr.go && tar czvf boilr-$VERSION-linux_amd64.tgz boilr
+  - GOARCH=386   GOOS=linux  go build boilr.go && tar czvf boilr-$VERSION-linux_386.tgz boilr
+  - GOARCH=amd64 GOOS=darwin go build boilr.go && tar czvf boilr-$VERSION-darwin_amd64.tgz boilr
+  - GOARCH=386   GOOS=darwin go build boilr.go && tar czvf boilr-$VERSION-darwin_386.tgz boilr
 
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: eAteyECZcUu3twjlO50Zvz2tU//9j3OOXYh6FQEAyF8R1BqtsyojoFm3hj6RqjaehNn/w4aA+icXn+vCp5fp4c3waodOqOgy5zUH+c/mca6XYOX1LOGKVfNvdn1500t33YVNL/df0VcpZRDDWggJEeoyF15EE4rx6tVQEsQ3ffeWO3gGgD28373JSxXuZf+cuYtrL3H2DYTWc2D58jI6W3PnrbHACcEd4ULvGxNc0TeciJiRTQADTYzxxmr4C2DlVbtQaUGgMImQ/S1woOGmePquwkH8MihnWeIA9+GlmZhrXi807x7SbaR2Hqkz7jWJhtdS0cicXotdRoVGNYsOgCuH4oJDedEVQK1CdmQgJWhxToWkBua6Jkvukx7HpVBp/4Ggv4eCskjF2A55tC1MBX3BglwZAPXdwtck2J5nb4BVXUrYEIk+KLBficm3FiCLiLnpqC4h4btlprK+4qfrS0/KSgcRefskBh4WPRe4Xw+8OaJILGPxw4WVbSMFOvSZqorxv89aek+QCukQZC6VIR9trrAKUa0smtKLsxq9tr+AgY5gSirum4fu/OcdvangF3JxO5E5d1eSBDg1W1/vXySkpmHQsr46/i49pHoKINOkhgxOtHIKJF7Zg5PQNkYKDqfr2Egmi1EWId5Nv3DVAp+igI8gXbrNy0G0a9+nLhQ=
   file:
@@ -22,7 +28,6 @@ deploy:
     - boilr-$VERSION-darwin_amd64.tgz
     - boilr-$VERSION-linux_386.tgz
     - boilr-$VERSION-linux_amd64.tgz
-  skip_cleanup: true
   on:
     repo: Ilyes512/boilr
     branch: master

@@ -11,7 +11,6 @@ require (
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/imdario/mergo v0.3.6 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/kr/pty v1.1.3 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/mattn/go-runewidth v0.0.3 // indirect
@@ -27,5 +26,3 @@ require (
 	gopkg.in/src-d/go-git.v4 v4.7.1
 	gopkg.in/yaml.v2 v2.2.1 // indirect
 )
-
-replace github.com/Masterminds/sprig => github.com/Ilyes512/sprig v2.16.1-0.20181102195643-ca331a1b2766+incompatible
