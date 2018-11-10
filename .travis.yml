@@ -8,14 +8,20 @@ env:
   global:
     - CGO_ENABLED=0
     - GO111MODULE=on
-    - VERSION=0.4.4
+    - VERSION=`git describe --tags --abbrev=0`
+    - APP_VERSION=`git describe --tags --long --dirty`
+    - APP_BUILDTIME=`date -u '+%Y-%m-%d %H:%M:%S'`
+    - APP_GITHASH=`git rev-parse HEAD`
+    - APP_IMPORTPATH=github.com/Ilyes512/boilr/pkg/boilr
+    - LDFLAGS="-X '${APP_IMPORTPATH}.Version=${APP_VERSION}' -X '${APP_IMPORTPATH}.BuildTime=${APP_BUILDTIME}' -X '${APP_IMPORTPATH}.GitHash=${APP_GITHASH}'"
 
 script:
   - go test
-  - GOARCH=amd64 GOOS=linux  go build boilr.go && tar czvf boilr-$VERSION-linux_amd64.tgz boilr
-  - GOARCH=386   GOOS=linux  go build boilr.go && tar czvf boilr-$VERSION-linux_386.tgz boilr
-  - GOARCH=amd64 GOOS=darwin go build boilr.go && tar czvf boilr-$VERSION-darwin_amd64.tgz boilr
-  - GOARCH=386   GOOS=darwin go build boilr.go && tar czvf boilr-$VERSION-darwin_386.tgz boilr
+  - GOARCH=amd64 GOOS=linux  go build -ldflags "${LDFLAGS}" boilr.go && tar czvf boilr-$VERSION-linux_amd64.tgz boilr
+  - GOARCH=386   GOOS=linux  go build -ldflags "${LDFLAGS}" boilr.go && tar czvf boilr-$VERSION-linux_386.tgz boilr
+  - GOARCH=amd64 GOOS=darwin go build -ldflags "${LDFLAGS}" boilr.go && tar czvf boilr-$VERSION-darwin_amd64.tgz boilr
+  - GOARCH=386   GOOS=darwin go build -ldflags "${LDFLAGS}" boilr.go && tar czvf boilr-$VERSION-darwin_386.tgz boilr
+  - ls -la
 
 deploy:
   provider: releases
