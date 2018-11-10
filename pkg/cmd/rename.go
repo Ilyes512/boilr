@@ -11,14 +11,6 @@ import (
 	"github.com/Ilyes512/boilr/pkg/util/validate"
 )
 
-func renameTemplate(oldPath, newPath string) error {
-	if err := os.Rename(oldPath, newPath); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // Rename contains the cli-command for renaming templates in the template registry.
 var Rename = &cli.Command{
 	Hidden: true,
@@ -26,8 +18,8 @@ var Rename = &cli.Command{
 	Short:  "Rename a project template",
 	Run: func(c *cli.Command, args []string) {
 		MustValidateArgs(args, []validate.Argument{
-			{"old-template-tag", validate.UnixPath},
-			{"new-template-tag", validate.UnixPath},
+			{Name: "old-template-tag", Validate: validate.UnixPath},
+			{Name: "new-template-tag", Validate: validate.UnixPath},
 		})
 
 		MustValidateTemplateDir()
@@ -50,7 +42,7 @@ var Rename = &cli.Command{
 			exit.Fatal(fmt.Errorf("rename: %s", err))
 		}
 
-		if err := renameTemplate(tmplPath, newTmplPath); err != nil {
+		if err := os.Rename(tmplPath, newTmplPath); err != nil {
 			exit.Error(fmt.Errorf("rename: %s", err))
 		}
 

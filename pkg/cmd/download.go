@@ -22,8 +22,8 @@ var Download = &cli.Command{
 	// FIXME Half-Updates leave messy templates
 	Run: func(cmd *cli.Command, args []string) {
 		MustValidateArgs(args, []validate.Argument{
-			{"template-repo", validate.UnixPath},
-			{"template-tag", validate.AlphanumericExt},
+			{Name: "template-repo", Validate: validate.UnixPath},
+			{Name: "template-tag", Validate: validate.AlphanumericExt},
 		})
 
 		MustValidateTemplateDir()

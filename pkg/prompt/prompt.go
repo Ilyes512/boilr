@@ -12,14 +12,11 @@ import (
 
 type templateFunc func() interface{}
 
+// Interface for prompts.
 type Interface interface {
 	// PromptMessage returns a proper prompt message for the given field with the given default value.
 	PromptMessage(string) string
 	EvaluateChoice(string) (interface{}, error)
-}
-
-type Chain struct {
-	Prompts []Interface
 }
 
 type strPrompt string
@@ -86,6 +83,7 @@ func (p multipleChoicePrompt) EvaluateChoice(c string) (interface{}, error) {
 	return p[0], nil
 }
 
+// Func creates template functions for prompts.
 // TODO add deep pretty printer
 // TODO handle TOML
 func Func(defval interface{}) Interface {

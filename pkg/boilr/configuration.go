@@ -57,6 +57,7 @@ func TemplatePath(name string) (string, error) {
 	return filepath.Join(Configuration.TemplateDirPath, name), nil
 }
 
+// IsTemplateDirInitialized returns true when the template dir is already initialized.
 func IsTemplateDirInitialized() (bool, error) {
 	return osutil.DirExists(Configuration.TemplateDirPath)
 }

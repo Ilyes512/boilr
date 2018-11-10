@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	cli "github.com/spf13/cobra"
 	"github.com/Ilyes512/boilr/pkg/boilr"
 	"github.com/Ilyes512/boilr/pkg/util/exit"
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
+	cli "github.com/spf13/cobra"
 )
 
 func configureBashCompletion() error {

@@ -20,8 +20,8 @@ var Save = &cli.Command{
 	Short: "Save a local project template to template registry",
 	Run: func(c *cli.Command, args []string) {
 		MustValidateArgs(args, []validate.Argument{
-			{"template-path", validate.UnixPath},
-			{"template-tag", validate.AlphanumericExt},
+			{Name: "template-path", Validate: validate.UnixPath},
+			{Name: "template-tag", Validate: validate.AlphanumericExt},
 		})
 
 		MustValidateTemplateDir()
