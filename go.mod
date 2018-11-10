@@ -26,3 +26,5 @@ require (
 	gopkg.in/src-d/go-git.v4 v4.7.1
 	gopkg.in/yaml.v2 v2.2.1 // indirect
 )
+
+replace github.com/Masterminds/sprig => github.com/Ilyes512/sprig v2.16.1-0.20181102195643-ca331a1b2766+incompatible
