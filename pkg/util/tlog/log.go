@@ -36,6 +36,7 @@ var (
 // Level is a 16-bit set holding the enabled log levels.
 type Level uint16
 
+// All available error levels.
 const (
 	LevelDebug   = 1 << 5
 	LevelFatal   = 1 << 4
