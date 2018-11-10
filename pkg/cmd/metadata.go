@@ -20,7 +20,7 @@ func serializeMetadata(tag string, repo string, targetDir string) error {
 
 	enc := json.NewEncoder(f)
 
-	t := template.Metadata{tag, repo, template.NewTime()}
+	t := template.Metadata{Tag: tag, Repository: repo, Created: template.NewTime()}
 	if err := enc.Encode(&t); err != nil {
 		return err
 	}

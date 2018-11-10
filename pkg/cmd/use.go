@@ -34,8 +34,8 @@ var Use = &cli.Command{
 	Short: "Execute a project template in the given directory",
 	Run: func(cmd *cli.Command, args []string) {
 		MustValidateArgs(args, []validate.Argument{
-			{"template-tag", validate.UnixPath},
-			{"target-dir", validate.UnixPath},
+			{Name: "template-tag", Validate: validate.UnixPath},
+			{Name: "target-dir", Validate: validate.UnixPath},
 		})
 
 		MustValidateTemplateDir()
