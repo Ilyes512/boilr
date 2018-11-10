@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/Ilyes512/boilr/pkg/boilr"
 	"github.com/Ilyes512/boilr/pkg/cmd"
 	"github.com/Ilyes512/boilr/pkg/util/exit"

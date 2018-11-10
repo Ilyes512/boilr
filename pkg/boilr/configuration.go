@@ -11,12 +11,21 @@ import (
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
 )
 
+// All the below variables should be set with -X go linker option
+var (
+	// Version of the application
+	Version = "NOT_SET"
+
+	// BuildTime of the application
+	BuildTime = "NOT_SET"
+
+	// GitHash of the application
+	GitHash = "NOT_SET"
+)
+
 const (
 	// AppName of the application
 	AppName = "boilr"
-
-	// Version of the application
-	Version = "0.4.4"
 
 	// ConfigDirPath is the configuration directory of the application
 	ConfigDirPath = ".config/boilr"
