@@ -3,9 +3,9 @@ package cmd
 import (
 	"errors"
 
-	cli "github.com/spf13/cobra"
 	"github.com/Ilyes512/boilr/pkg/util/exit"
 	"github.com/Ilyes512/boilr/pkg/util/validate"
+	cli "github.com/spf13/cobra"
 )
 
 var (
