@@ -11,6 +11,7 @@ require (
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/imdario/mergo v0.3.6 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/kr/pty v1.1.3 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/mattn/go-runewidth v0.0.3 // indirect
@@ -19,10 +20,11 @@ require (
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/pflag v1.0.3 // indirect
 	github.com/src-d/gcfg v1.4.0 // indirect
-	golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16 // indirect
-	golang.org/x/net v0.0.0-20181102091132-c10e9556a7bc // indirect
-	golang.org/x/sys v0.0.0-20181031143558-9b800f95dbbc // indirect
+	golang.org/x/crypto v0.0.0-20181112202954-3d3f9f413869 // indirect
+	golang.org/x/net v0.0.0-20181113165502-88d92db4c548 // indirect
+	golang.org/x/sys v0.0.0-20181107165924-66b7b1311ac8 // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.0 // indirect
+	gopkg.in/src-d/go-git-fixtures.v3 v3.2.0 // indirect
 	gopkg.in/src-d/go-git.v4 v4.7.1
 	gopkg.in/yaml.v2 v2.2.1 // indirect
 )
