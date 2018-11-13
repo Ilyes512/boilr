@@ -12,14 +12,6 @@ env:
 install:
   - go mod download
 
-script:
-  - go test
-  - GOARCH=amd64 GOOS=linux  go build boilr.go && tar czvf boilr-$VERSION-linux_amd64.tgz boilr
-  - GOARCH=386   GOOS=linux  go build boilr.go && tar czvf boilr-$VERSION-linux_386.tgz boilr
-  - GOARCH=amd64 GOOS=darwin go build boilr.go && tar czvf boilr-$VERSION-darwin_amd64.tgz boilr
-  - GOARCH=386   GOOS=darwin go build boilr.go && tar czvf boilr-$VERSION-darwin_386.tgz boilr
-
-
 deploy:
   - provider: script
     skip_cleanup: true
