@@ -1,14 +1,17 @@
-<h1 align=center>
-Boilr
-<br>
-<img src="/assets/logo.png" height="360">
-<br>
+<p align="center">
+  <img alt="Boilr Logo" src="/assets/logo.png" height="200" />
+  <h3 align="center">Boilr</h3>
+</p>
+
+---
+
+<p align="center">
 <a href="https://travis-ci.com/Ilyes512/boilr"><img alt="Build Status" src="https://img.shields.io/travis/com/Ilyes512/boilr.svg?style=flat-square" /></a>
 <a href="https://github.com/Ilyes512/boilr/blob/master/LICENSE" ><img alt="License" src="https://img.shields.io/badge/license-Apache%20License%202.0-E91E63.svg?style=flat-square"/></a>
-<a href="https://github.com/Ilyes512/boilr/releases" ><img alt="Release Version" src="https://img.shields.io/badge/release-v0.4.4-blue.svg?style=flat-square"/></a>
-<a href="http://goreportcard.com/report/Ilyes512/boilr" ><img alt="Code Quality" src="https://img.shields.io/badge/report%20card-A%2B-F44336.svg?style=flat-square"/></a>
+<a href="https://github.com/Ilyes512/boilr/releases" ><img alt="Release Version" src="https://img.shields.io/github/release/Ilyes512/boilr.svg?style=flat-square"/></a>
+<a href="http://goreportcard.com/report/Ilyes512/boilr" ><img alt="Code Quality" src="https://goreportcard.com/badge/github.com/Ilyes512/boilr?style=flat-square"/></a>
 <a href="https://godoc.org/github.com/Ilyes512/boilr" ><img alt="Documentation" src="https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square"/></a>
-</h1>
+</p>
 
 <p align=center>
 <em>Are you doing the <b>same steps over and over again</b> every time you start a new programming project?</em>

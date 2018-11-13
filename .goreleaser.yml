@@ -1,0 +1,22 @@
+archive:
+  replacements:
+    darwin: macOS
+    linux: Linux
+    windows: Windows
+    386: 32-bit
+    amd64: 64-bit
+snapshot:
+  name_template: "{{ .Tag }}-next"
+brew:
+  github:
+    owner: Ilyes512
+    name: homebrew-boilr
+  commit_author:
+    name: goreleaserbot
+    email: ilyes.ahidar@gmail.com
+  folder: Formula
+  homepage: https://github.com/Ilyes512/boilr
+  description: "Boilerplate template manager that generates files or directories from template repositories"
+builds:
+  - ldflags:
+      - -s -w -X 'github.com/Ilyes512/boilr/pkg/boilr.Version={{.Version}}' -X 'github.com/Ilyes512/boilr/pkg/boilr.BuildDate={{.Date}}' -X 'github.com/Ilyes512/boilr/pkg/boilr.Commit={{.Commit}}'
