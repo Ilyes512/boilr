@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/docker/go-units"
+	units "github.com/docker/go-units"
 )
 
 // Metadata contains the information for a template.
