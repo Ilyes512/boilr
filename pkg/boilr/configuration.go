@@ -21,6 +21,9 @@ var (
 
 	// Commit hash of the application
 	Commit = "NOT_SET"
+
+	// Respect XDG Base Directory Specification if set
+	XDGHomeDir := os.Getenv("XDG_CONFIG_HOME")
 )
 
 const (
@@ -28,7 +31,11 @@ const (
 	AppName = "boilr"
 
 	// ConfigDirPath is the configuration directory of the application
-	ConfigDirPath = ".config/boilr"
+	if XDGHomeDir == "" {
+		ConfigDirPath = ".config/boilr"
+	} else {
+		ConfigDirPath = "/boilr"
+	}
 
 	// ConfigFileName is the configuration file name of the application
 	ConfigFileName = "config.json"
@@ -76,6 +83,10 @@ func init() {
 	if homeDir == "" {
 		// FIXME is this really necessary?
 		exit.Error(fmt.Errorf("environment variable ${HOME} should be set"))
+	}
+
+	if XDGHomeDir != "" {
+		homeDir = XDGHomeDir
 	}
 
 	Configuration.FilePath = filepath.Join(homeDir, ConfigDirPath, ConfigFileName)

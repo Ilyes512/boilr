@@ -40,7 +40,7 @@ func configureBashCompletion() error {
 source %s
 `
 
-	bashrcText = fmt.Sprintf(bashrcText, filepath.Join("$HOME", boilr.ConfigDirPath, "completion.bash"))
+	bashrcText = fmt.Sprintf(bashrcText, filepath.Join(boilr.Configuration.ConfigDirPath, "completion.bash"))
 
 	if _, err = f.WriteString(bashrcText); err != nil {
 		return err
