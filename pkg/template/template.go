@@ -203,6 +203,11 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 				return err
 			}
 			if isBin {
+				_, err = origF.Seek(io.SeekStart, 0)
+				if err != nil {
+					return err
+				}
+
 				_, err = io.Copy(f, origF)
 				return err
 			}
