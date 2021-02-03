@@ -66,6 +66,7 @@ func Run() {
 	Use.PersistentFlags().BoolP("use-defaults", "f", false, "Uses default values in project.json instead of prompting the user")
 	Use.PersistentFlags().StringP("log-level", "l", "error", "log-level for output")
 	Template.AddCommand(Use)
+
 	Template.AddCommand(Validate)
 
 	Init.PersistentFlags().BoolP("force", "f", false, "Recreate directories if they exist")

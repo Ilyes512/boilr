@@ -1,14 +1,17 @@
 package cmd
 
 import (
+	"bytes"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	cli "github.com/spf13/cobra"
 
 	"github.com/Ilyes512/boilr/pkg/boilr"
 	"github.com/Ilyes512/boilr/pkg/util/exit"
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
-	cli "github.com/spf13/cobra"
 )
 
 func configureBashCompletion() error {
@@ -29,7 +32,7 @@ func configureBashCompletion() error {
 
 	bashrcPath := filepath.Join(homeDir, ".bashrc")
 
-	f, err := os.OpenFile(bashrcPath, os.O_APPEND|os.O_WRONLY, 0600)
+	f, err := os.OpenFile(bashrcPath, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0600)
 	if err != nil {
 		return err
 	}
@@ -37,10 +40,23 @@ func configureBashCompletion() error {
 
 	bashrcText := `
 # Enables command-line completion for boilr
-source %s
+if [[ -f "%s" ]]; then
+  source "%s"
+fi
 `
 
-	bashrcText = fmt.Sprintf(bashrcText, filepath.Join("$HOME", boilr.ConfigDirPath, "completion.bash"))
+	filePath := filepath.Join("$HOME", boilr.ConfigDirPath, "completion.bash")
+	bashrcText = fmt.Sprintf(bashrcText, filePath, filePath)
+
+	data, err := ioutil.ReadAll(f)
+	if err != nil {
+		return err
+	}
+
+	// skip append duplicate
+	if bytes.Contains(data, []byte(bashrcText)) {
+		return nil
+	}
 
 	if _, err = f.WriteString(bashrcText); err != nil {
 		return err
