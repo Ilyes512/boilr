@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"text/template"
 
 	"github.com/Ilyes512/boilr/pkg/boilr"
@@ -161,6 +162,18 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 		}
 
 		newName := buf.String()
+
+		if oldName != newName {
+			tlog.Debug(fmt.Sprintf("change name from %q to %q", oldName, newName))
+		}
+
+		splitPath := strings.Split(newName, string(filepath.Separator))
+		for _, s := range splitPath {
+			if s == "" {
+				tlog.Debug(fmt.Sprintf("skip creating a file or directory with an empty name %q -> %q", oldName, newName))
+				return nil
+			}
+		}
 
 		target := filepath.Join(dirPrefix, newName)
 
