@@ -5,6 +5,36 @@ import cli "github.com/spf13/cobra"
 // Root contains the root cli-command containing all the other commands.
 var Root = &cli.Command{
 	Use: "boilr",
+	BashCompletionFunction: `
+__boilr_get_template_list()
+{
+    local list_output
+    if list_output=$(boilr template list --dont-prettify 2>/dev/null); then
+        COMPREPLY=( $( compgen -W "${list_output[*]}" -- "$cur" ) )
+    fi
+}
+
+__boilr_template_list() {
+    if [[ ${#nouns[@]} -ne 0 ]]; then
+        return 1
+    fi
+    __boilr_get_template_list ${nouns[0]}
+    if [[ $? -eq 0 ]]; then
+        return 0
+    fi
+}
+
+__custom_func() {
+    case ${last_command} in
+        boilr_template_use | boilr_template_delete)
+            __boilr_template_list
+            return
+            ;;
+        *)
+            ;;
+    esac
+}
+`,
 }
 
 // Run executes the cli-command root.
@@ -36,7 +66,6 @@ func Run() {
 	Use.PersistentFlags().BoolP("use-defaults", "f", false, "Uses default values in project.json instead of prompting the user")
 	Use.PersistentFlags().StringP("log-level", "l", "error", "log-level for output")
 	Template.AddCommand(Use)
-
 	Template.AddCommand(Validate)
 
 	Init.PersistentFlags().BoolP("force", "f", false, "Recreate directories if they exist")
