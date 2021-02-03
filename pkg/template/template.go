@@ -1,20 +1,24 @@
 package template
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
 	"text/template"
+	"unicode/utf8"
+
+	"github.com/Masterminds/sprig"
 
 	"github.com/Ilyes512/boilr/pkg/boilr"
 	"github.com/Ilyes512/boilr/pkg/prompt"
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
 	"github.com/Ilyes512/boilr/pkg/util/stringutil"
 	"github.com/Ilyes512/boilr/pkg/util/tlog"
-	"github.com/Masterminds/sprig"
 )
 
 // Interface is contains the behavior of boilr templates.
@@ -187,6 +191,22 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			}
 			defer f.Close()
 
+			// Open original file and check if a binary file
+			origF, err := os.Open(filename)
+			if err != nil {
+				return err
+			}
+			defer origF.Close()
+
+			isBin, err := isBinary(origF)
+			if err != nil {
+				return err
+			}
+			if isBin {
+				_, err = io.Copy(f, origF)
+				return err
+			}
+
 			defer func(fname string) {
 				contents, err := ioutil.ReadFile(fname)
 				if err != nil {
@@ -220,6 +240,16 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 
 		return nil
 	})
+}
+
+func isBinary(r io.Reader) (bool, error) {
+	buf := make([]byte, 1024)
+	n, err := r.Read(buf)
+	if err != nil && err != io.EOF {
+		return false, err
+	}
+
+	return !utf8.Valid(buf[:n]) || bytes.ContainsAny(buf[:n], "\x00"), nil
 }
 
 func handleBindDefaults(t *dirTemplate, parentKey string) {
