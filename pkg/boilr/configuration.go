@@ -59,6 +59,7 @@ var Configuration = struct {
 	FilePath        string
 	ConfigDirPath   string
 	TemplateDirPath string
+	IgnoreCopyFiles []string
 }{}
 
 // TemplatePath returns the absolute path of a template given the name of the template.
@@ -81,6 +82,14 @@ func init() {
 	Configuration.FilePath = filepath.Join(homeDir, ConfigDirPath, ConfigFileName)
 	Configuration.ConfigDirPath = filepath.Join(homeDir, ConfigDirPath)
 	Configuration.TemplateDirPath = filepath.Join(homeDir, ConfigDirPath, TemplateDir)
+	Configuration.IgnoreCopyFiles = []string{
+		// MacOS
+		".DS_Store", "._*",
+		// Windows
+		"Thumbs.db", "Thumbs.db:encryptable", "desktop.ini", "Desktop.ini",
+		// Linux
+		".directory", "*~",
+	}
 
 	// Read .config/boilr/config.json if exists
 	// TODO use defaults if config.json doesn't exist
@@ -91,7 +100,7 @@ func init() {
 
 	if !hasConfig {
 		// TODO report the absence of config.json
-		//tlog.Debug("Couldn't find %s user configuration", ConfigFileName)
+		// tlog.Debug("Couldn't find %s user configuration", ConfigFileName)
 		return
 	}
 

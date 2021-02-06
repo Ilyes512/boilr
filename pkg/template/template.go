@@ -14,6 +14,9 @@ import (
 
 	"github.com/Masterminds/sprig"
 
+	"github.com/Masterminds/sprig"
+	"github.com/ryanuber/go-glob"
+
 	"github.com/Ilyes512/boilr/pkg/boilr"
 	"github.com/Ilyes512/boilr/pkg/prompt"
 	"github.com/Ilyes512/boilr/pkg/util/osutil"
@@ -144,6 +147,10 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			return err
 		}
 
+		if ignoreCopyFile(filepath.Base(filename)) {
+			return nil
+		}
+
 		// Path relative to the root of the template directory
 		oldName, err := filepath.Rel(t.Path, filename)
 		if err != nil {
@@ -255,6 +262,16 @@ func isBinary(r io.Reader) (bool, error) {
 	}
 
 	return !utf8.Valid(buf[:n]) || bytes.ContainsAny(buf[:n], "\x00"), nil
+}
+
+func ignoreCopyFile(filename string) bool {
+	for _, pattern := range boilr.Configuration.IgnoreCopyFiles {
+		if glob.Glob(pattern, filename) {
+			return true
+		}
+	}
+
+	return false
 }
 
 func handleBindDefaults(t *dirTemplate, parentKey string) {
