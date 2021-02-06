@@ -13,8 +13,6 @@ import (
 	"unicode/utf8"
 
 	"github.com/Masterminds/sprig"
-
-	"github.com/Masterminds/sprig"
 	"github.com/ryanuber/go-glob"
 
 	"github.com/Ilyes512/boilr/pkg/boilr"
