@@ -1,22 +1,64 @@
-archive:
-  replacements:
-    darwin: macOS
-    linux: Linux
-    windows: Windows
-    386: 32-bit
-    amd64: 64-bit
-snapshot:
-  name_template: "{{ .Tag }}-next"
-brew:
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+version: 1
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  -
+    ldflags:
+      - -s -w -X 'github.com/Ilyes512/boilr/pkg/boilr.Version={{.Version}}' -X 'github.com/Ilyes512/boilr/pkg/boilr.BuildDate={{.Date}}' -X 'github.com/Ilyes512/boilr/pkg/boilr.Commit={{.Commit}}'
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: linux
+        goarch: arm64
+
+archives:
+  -
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+
+release:
   github:
     owner: Ilyes512
-    name: homebrew-boilr
-  commit_author:
-    name: goreleaserbot
-    email: ilyes.ahidar@gmail.com
-  folder: Formula
-  homepage: https://github.com/Ilyes512/boilr
-  description: "Boilerplate template manager that generates files or directories from template repositories"
-builds:
-  - ldflags:
-      - -s -w -X 'github.com/Ilyes512/boilr/pkg/boilr.Version={{.Version}}' -X 'github.com/Ilyes512/boilr/pkg/boilr.BuildDate={{.Date}}' -X 'github.com/Ilyes512/boilr/pkg/boilr.Commit={{.Commit}}'
+    name: boilr
+
+brews:
+  -
+    repository:
+      owner: Ilyes512
+      name: homebrew-boilr
+    commit_author:
+      name: ilyes[BOT]
+      email: ilyes.ahidar@gmail.com
+    folder: Formula
+    homepage: https://github.com/Ilyes512/boilr
+    description: "Boilerplate template manager that generates files or directories from template repositories"
+    license: "Apache-2.0"
+    test: |
+      system "#{bin}/boilr --version"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"

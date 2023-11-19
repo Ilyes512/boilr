@@ -41,3 +41,11 @@ tasks:
     cmds:
       - docker volume rm {{.GO_CACHE_VOLUME_NAME}} || true
       - docker volume rm {{.GO_MOD_CACHE_VOLUME_NAME}} || true
+
+  go:r:snapshot-build:
+    cmds:
+      - goreleaser build --clean --snapshot
+
+  go:r:snapshot-build:single:
+    cmds:
+      - goreleaser build --clean --snapshot --single-target
