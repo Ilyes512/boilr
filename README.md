@@ -6,7 +6,6 @@
 ---
 
 <p align="center">
-<a href="https://travis-ci.com/Ilyes512/boilr"><img alt="Build Status" src="https://img.shields.io/travis/com/Ilyes512/boilr.svg?style=flat-square" /></a>
 <a href="https://github.com/Ilyes512/boilr/blob/master/LICENSE" ><img alt="License" src="https://img.shields.io/badge/license-Apache%20License%202.0-E91E63.svg?style=flat-square"/></a>
 <a href="https://github.com/Ilyes512/boilr/releases" ><img alt="Release Version" src="https://img.shields.io/github/release/Ilyes512/boilr.svg?style=flat-square"/></a>
 <a href="http://goreportcard.com/report/Ilyes512/boilr" ><img alt="Code Quality" src="https://goreportcard.com/badge/github.com/Ilyes512/boilr?style=flat-square"/></a>
