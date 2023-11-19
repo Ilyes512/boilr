@@ -29,3 +29,5 @@ vendor
 
 # don't accidentally commit a build of main
 boilr
+
+dist/
