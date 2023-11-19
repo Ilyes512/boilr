@@ -6,16 +6,14 @@
 ---
 
 <p align="center">
-
-[![Build Boilr](https://github.com/Ilyes512/boilr/actions/workflows/build.yml/badge.svg)](https://github.com/Ilyes512/boilr/actions/workflows/build.yml)
-<a href="https://github.com/Ilyes512/boilr/blob/master/LICENSE" ><img alt="License" src="https://img.shields.io/badge/license-Apache%20License%202.0-E91E63.svg?style=flat-square"/></a>
-<a href="https://github.com/Ilyes512/boilr/releases" ><img alt="Release Version" src="https://img.shields.io/github/release/Ilyes512/boilr.svg?style=flat-square"/></a>
-<a href="http://goreportcard.com/report/Ilyes512/boilr" ><img alt="Code Quality" src="https://goreportcard.com/badge/github.com/Ilyes512/boilr?style=flat-square"/></a>
-<a href="https://godoc.org/github.com/Ilyes512/boilr" ><img alt="Documentation" src="https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square"/></a>
-
+<a href="https://github.com/Ilyes512/boilr/actions/workflows/build.yml"><img alt="Build Boilr" src="https://github.com/Ilyes512/boilr/actions/workflows/build.yml/badge.svg" /></a>
+<a href="https://github.com/Ilyes512/boilr/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache%20License%202.0-E91E63.svg?style=flat-square" /></a>
+<a href="https://github.com/Ilyes512/boilr/releases"><img alt="Release Version" src="https://img.shields.io/github/release/Ilyes512/boilr.svg?style=flat-square" /></a>
+<a href="http://goreportcard.com/report/Ilyes512/boilr"><img alt="Code Quality" src="https://goreportcard.com/badge/github.com/Ilyes512/boilr?style=flat-square" /></a>
+<a href="https://godoc.org/github.com/Ilyes512/boilr"><img alt="Documentation" src="https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square" /></a>
 </p>
 
-<p align=center>
+<p align="center">
 <em>Are you doing the <b>same steps over and over again</b> every time you start a new programming project?</em>
 <br><br>
 <em>Boilr is here to help you <b>create projects from boilerplate templates</b>.</em>
