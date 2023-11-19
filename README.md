@@ -120,17 +120,6 @@ The user will be prompted as follows:
 
 For more information please take a look at [Usage](https://github.com/Ilyes512/boilr/wiki/Usage) and [Creating Templates](https://github.com/tmrts/Ilyes512/wiki/Creating-Templates) pages in the wiki.
 
-# List of Templates
-
-<img alt="Electron Logo" height=96 width=96
-src="https://cdn.rawgit.com/tmrts/boilr/master/assets/template-logos/electron.svg" />
-<img alt="Docker Logo" height=96 width=96
-src="https://cdn.rawgit.com/tmrts/boilr/master/assets/template-logos/docker.svg" />
-<img alt="Kubernetes Logo" height=96 width=96
-src="https://cdn.rawgit.com/tmrts/boilr/master/assets/template-logos/kubernetes.svg" />
-
-Take a look at the [Templates](https://github.com/Ilyes512/boilr/wiki/Templates) page for an index of project templates, examples, and more information.
-
 # Need Help? Found a bug? Want a Feature?
 If you'd like to contribute, share your opinions or ask questions, please feel free to open an issue.
 
