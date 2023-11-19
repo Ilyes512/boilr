@@ -1,0 +1,43 @@
+# https://taskfile.dev
+
+version: '3'
+
+silent: true
+
+env:
+  # BUILDKIT_PROGRESS: plain
+
+vars:
+  GO_VERSION: bookworm
+  GO_CACHE_VOLUME_NAME: boilr-gocache
+  GO_MOD_CACHE_VOLUME_NAME: boilr-gomodcache
+
+tasks:
+
+  go:shell:
+    desc: Shell into golang container
+    cmds:
+      - docker run --rm -it
+        --workdir /workspace
+        --volume {{.GO_CACHE_VOLUME_NAME}}:/root/.cache/go-build
+        --volume {{.GO_MOD_CACHE_VOLUME_NAME}}:/go/pkg/mod
+        --volume ${PWD}/.:/workspace
+        golang:{{.GO_VERSION}}
+        bash
+
+  go:deps:
+    desc: List direct dependencies with their current version and possible newer version
+    cmds:
+      - docker run --rm -it
+        --workdir /workspace
+        --volume {{.GO_CACHE_VOLUME_NAME}}:/root/.cache/go-build
+        --volume {{.GO_MOD_CACHE_VOLUME_NAME}}:/go/pkg/mod
+        --volume ${PWD}/.:/workspace
+        golang:{{.GO_VERSION}}
+        /bin/bash -c 'go list -f "{{`{{if not (or .Main .Indirect)}}{{.Path}}{{end}}`}}" -m all | xargs -r go list -m -u'
+
+  go:remove-cache-volumes:
+    desc: Remove Go cache volumes
+    cmds:
+      - docker volume rm {{.GO_CACHE_VOLUME_NAME}} || true
+      - docker volume rm {{.GO_MOD_CACHE_VOLUME_NAME}} || true
