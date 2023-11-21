@@ -14,9 +14,10 @@ func TestUseExecutesProjectTemplate(t *testing.T) {
 	tmpDirPath, err := ioutil.TempDir("", "template-test")
 	if err != nil {
 		t.Fatalf("ioutil.TempDir() got error -> %v", err)
-	} else {
-		//defer os.RemoveAll(tmpDirPath)
 	}
+	// else {
+	// 	defer os.RemoveAll(tmpDirPath)
+	// }
 
 	if err := os.MkdirAll(filepath.Join(tmpDirPath, "input", "{{Name}}", "{{Date}}"), 0744); err != nil {
 		t.Fatalf("os.MkdirAll should have created template directories -> got error %v", err)
