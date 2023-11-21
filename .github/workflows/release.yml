@@ -21,6 +21,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: stable
+          check-latest: true
       - name: Use Goreleaser to release Boilr
         uses: goreleaser/goreleaser-action@v5
         with:

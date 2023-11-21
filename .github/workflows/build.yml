@@ -9,6 +9,7 @@ permissions: read-all
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -21,6 +22,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: stable
+          check-latest: true
       - name: Use Goreleaser for building Boilr
         uses: goreleaser/goreleaser-action@v5
         with:
