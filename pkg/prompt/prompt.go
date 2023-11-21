@@ -10,8 +10,6 @@ import (
 	"github.com/Ilyes512/boilr/pkg/util/tlog"
 )
 
-type templateFunc func() interface{}
-
 // Interface for prompts.
 type Interface interface {
 	// PromptMessage returns a proper prompt message for the given field with the given default value.
@@ -92,7 +90,7 @@ func Func(defval interface{}) Interface {
 		return boolPrompt(defval)
 	case []interface{}:
 		if len(defval) == 0 {
-			tlog.Warn(fmt.Sprintf("empty list of choices"))
+			tlog.Warn("empty list of choices")
 			return nil
 		}
 

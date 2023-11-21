@@ -17,7 +17,7 @@ type Metadata struct {
 
 // String returns the string slice form of Metadata.
 func (m Metadata) String() []string {
-	tDelta := time.Now().Sub(time.Time(m.Created))
+	tDelta := time.Since(time.Time(m.Created))
 	return []string{m.Tag, m.Repository, units.HumanDuration(tDelta) + " ago"}
 }
 
@@ -55,5 +55,5 @@ func (t *JSONTime) UnmarshalJSON(b []byte) error {
 
 // String returns the string form of JSONTime.
 func (t JSONTime) String() string {
-	return fmt.Sprintf("%s", time.Time(t).Format(timeFormat))
+	return time.Time(t).Format(timeFormat)
 }

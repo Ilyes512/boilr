@@ -110,7 +110,6 @@ type dirTemplate struct {
 	FuncMap  template.FuncMap
 	Metadata Metadata
 
-	alignment         string
 	ShouldUseDefaults bool
 }
 
@@ -208,7 +207,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 				return err
 			}
 			if isBin {
-				_, err = origF.Seek(io.SeekStart, 0)
+				_, err = origF.Seek(0, io.SeekStart)
 				if err != nil {
 					return err
 				}
