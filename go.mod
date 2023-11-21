@@ -8,6 +8,7 @@ require (
 	github.com/Masterminds/sprig v2.22.0+incompatible
 	github.com/docker/go-units v0.5.0
 	github.com/fatih/color v1.16.0
+	github.com/go-git/go-git/v5 v5.10.0
 	github.com/google/uuid v1.0.0 // indirect
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/imdario/mergo v0.3.6 // indirect
@@ -16,6 +17,4 @@ require (
 	github.com/ryanuber/go-glob v1.0.0
 	github.com/sethvargo/go-password v0.2.0
 	github.com/spf13/cobra v1.8.0
-	gopkg.in/src-d/go-git.v4 v4.13.1
-	gopkg.in/yaml.v2 v2.2.1 // indirect
 )

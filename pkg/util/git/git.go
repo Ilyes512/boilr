@@ -1,7 +1,7 @@
 // Package git is a facade for git methods used by boilr
 package git
 
-import git "gopkg.in/src-d/go-git.v4"
+import git "github.com/go-git/go-git/v5"
 
 // CloneOptions are used when cloning a git repository
 type CloneOptions git.CloneOptions
