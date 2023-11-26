@@ -3,7 +3,7 @@ package exec
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os/exec"
 )
 
@@ -28,13 +28,13 @@ func Cmd(executable string, args ...string) (string, error) {
 		return "", err
 	}
 
-	outBuf, err := ioutil.ReadAll(stdout)
+	outBuf, err := io.ReadAll(stdout)
 	if err != nil {
 		return "", err
 	}
 	out := string(outBuf)
 
-	errBuf, err := ioutil.ReadAll(stderr)
+	errBuf, err := io.ReadAll(stderr)
 	if err != nil {
 		fmt.Println(errBuf)
 		return "", err

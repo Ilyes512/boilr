@@ -3,7 +3,6 @@ package boilr
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -104,7 +103,7 @@ func init() {
 		return
 	}
 
-	buf, err := ioutil.ReadFile(Configuration.FilePath)
+	buf, err := os.ReadFile(Configuration.FilePath)
 	if err != nil {
 		exit.Error(err)
 	}

@@ -1,7 +1,6 @@
 package cmd_test
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -11,9 +10,9 @@ import (
 
 func TestUseExecutesProjectTemplate(t *testing.T) {
 	t.SkipNow()
-	tmpDirPath, err := ioutil.TempDir("", "template-test")
+	tmpDirPath, err := os.MkdirTemp("", "template-test")
 	if err != nil {
-		t.Fatalf("ioutil.TempDir() got error -> %v", err)
+		t.Fatalf("os.MkdirTemp() got error -> %v", err)
 	}
 	// else {
 	// 	defer os.RemoveAll(tmpDirPath)
