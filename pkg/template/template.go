@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -57,7 +56,7 @@ func Get(path string) (Interface, error) {
 		}
 		defer f.Close()
 
-		buf, err := ioutil.ReadAll(f)
+		buf, err := io.ReadAll(f)
 		if err != nil {
 			return nil, err
 		}
@@ -83,7 +82,7 @@ func Get(path string) (Interface, error) {
 			return Metadata{}, nil
 		}
 
-		b, err := ioutil.ReadFile(filepath.Join(absPath, boilr.TemplateMetadataName))
+		b, err := os.ReadFile(filepath.Join(absPath, boilr.TemplateMetadataName))
 		if err != nil {
 			return Metadata{}, err
 		}
@@ -217,7 +216,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			}
 
 			defer func(fname string) {
-				contents, err := ioutil.ReadFile(fname)
+				contents, err := os.ReadFile(fname)
 				if err != nil {
 					tlog.Debug(fmt.Sprintf("couldn't read the contents of file %q, got error %q", fname, err))
 					return

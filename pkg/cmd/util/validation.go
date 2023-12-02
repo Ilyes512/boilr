@@ -3,7 +3,6 @@ package util
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -70,7 +69,7 @@ func ValidateArgs(args []string, validations []validate.Argument) error {
 }
 
 func testTemplate(path string) error {
-	tmpDir, err := ioutil.TempDir("", "boilr-validation-test")
+	tmpDir, err := os.MkdirTemp("", "boilr-validation-test")
 	if err != nil {
 		return err
 	}

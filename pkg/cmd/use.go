@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -83,7 +82,7 @@ var Use = &cli.Command{
 				return fmt.Errorf("use: parent directory %q doesn't exist", parentDir)
 			}
 
-			tmpDir, err := ioutil.TempDir("", "boilr-use-template")
+			tmpDir, err := os.MkdirTemp("", "boilr-use-template")
 			if err != nil {
 				return err
 			}
