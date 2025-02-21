@@ -7,7 +7,7 @@ require (
 	github.com/Masterminds/semver v1.4.2 // indirect
 	github.com/Masterminds/sprig v2.22.0+incompatible
 	github.com/docker/go-units v0.5.0
-	github.com/fatih/color v1.16.0
+	github.com/fatih/color v1.18.0
 	github.com/go-git/go-git/v5 v5.11.0
 	github.com/google/uuid v1.0.0 // indirect
 	github.com/huandu/xstrings v1.2.0 // indirect
