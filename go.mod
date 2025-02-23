@@ -15,6 +15,6 @@ require (
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/ryanuber/go-glob v1.0.0
-	github.com/sethvargo/go-password v0.2.0
+	github.com/sethvargo/go-password v0.3.1
 	github.com/spf13/cobra v1.9.1
 )
