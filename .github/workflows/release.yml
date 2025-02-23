@@ -9,21 +9,21 @@ permissions:
 
 jobs:
   release:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-23.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
       - name: Force fetch tags
         run: git fetch --force --tags
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v5.3.0
         with:
           go-version: stable
           check-latest: true
       - name: Use Goreleaser to release Boilr
-        uses: goreleaser/goreleaser-action@v5
+        uses: goreleaser/goreleaser-action@v6.2.1
         with:
           distribution: goreleaser
           version: latest
