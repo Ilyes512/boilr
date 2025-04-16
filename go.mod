@@ -8,7 +8,7 @@ require (
 	github.com/Masterminds/sprig v2.22.0+incompatible
 	github.com/docker/go-units v0.5.0
 	github.com/fatih/color v1.18.0
-	github.com/go-git/go-git/v5 v5.15.0
+	github.com/go-git/go-git/v5 v5.16.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/ryanuber/go-glob v1.0.0
 	github.com/sethvargo/go-password v0.3.1
