@@ -23,7 +23,7 @@ jobs:
           go-version: stable
           check-latest: true
       - name: Use Goreleaser to release Boilr
-        uses: goreleaser/goreleaser-action@v6.3.0
+        uses: goreleaser/goreleaser-action@v6.4.0
         with:
           distribution: goreleaser
           version: '~> v2'
