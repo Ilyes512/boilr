@@ -11,7 +11,6 @@ import (
 	"text/template"
 	"unicode/utf8"
 
-	"github.com/Masterminds/sprig"
 	"github.com/ryanuber/go-glob"
 
 	"github.com/Ilyes512/boilr/pkg/boilr"
@@ -97,7 +96,7 @@ func Get(path string) (Interface, error) {
 
 	return &dirTemplate{
 		Context:  ctxt,
-		FuncMap:  FuncMap,
+		FuncMap:  buildFuncMap(),
 		Path:     filepath.Join(absPath, boilr.TemplateDirName),
 		Metadata: md,
 	}, err
@@ -159,8 +158,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 		fnameTmpl := template.Must(template.
 			New("file name template").
 			Option(Options...).
-			Funcs(sprig.TxtFuncMap()).
-			Funcs(FuncMap).
+			Funcs(t.FuncMap).
 			Parse(oldName))
 
 		if err := fnameTmpl.Execute(buf, nil); err != nil {
@@ -231,8 +229,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			contentsTmpl := template.Must(template.
 				New("file contents template").
 				Option(Options...).
-				Funcs(sprig.TxtFuncMap()).
-				Funcs(FuncMap).
+				Funcs(t.FuncMap).
 				ParseFiles(filename))
 
 			fileTemplateName := filepath.Base(filename)
