@@ -95,13 +95,13 @@ func CopyRecursively(srcPath, dstPath string) error {
 			if err != nil {
 				return err
 			}
-			defer srcf.Close()
+			defer func() { _ = srcf.Close() }()
 
 			dstf, err := os.OpenFile(mirrorPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, fi.Mode())
 			if err != nil {
 				return err
 			}
-			defer dstf.Close()
+			defer func() { _ = dstf.Close() }()
 
 			if _, err := io.Copy(dstf, srcf); err != nil {
 				return err

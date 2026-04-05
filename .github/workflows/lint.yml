@@ -16,16 +16,16 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v6.2.0
+        uses: actions/setup-go@v6
         with:
           go-version: stable
           check-latest: true
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v9.2.0
+        uses: golangci/golangci-lint-action@v9
         with:
           version: latest
           only-new-issues: true

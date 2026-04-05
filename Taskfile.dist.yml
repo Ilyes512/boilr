@@ -57,5 +57,6 @@ tasks:
       - goreleaser build --clean --snapshot
 
   go:r:snapshot-build:single:
+    desc: Build a single binary for the current platform with goreleaser in snapshot mode
     cmds:
       - goreleaser build --clean --snapshot --single-target

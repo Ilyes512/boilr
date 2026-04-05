@@ -36,7 +36,7 @@ func Cmd(executable string, args ...string) (string, error) {
 
 	errBuf, err := io.ReadAll(stderr)
 	if err != nil {
-		fmt.Println(errBuf)
+		fmt.Println(string(errBuf))
 		return "", err
 	}
 	errMsg := string(errBuf)

@@ -21,7 +21,7 @@ func ListTemplates() (map[string]bool, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer d.Close()
+	defer func() { _ = d.Close() }()
 
 	names, err := d.Readdirnames(-1)
 	if err != nil {
@@ -75,7 +75,9 @@ var List = &cli.Command{
 		if GetBoolFlag(cmd, "dont-prettify") {
 			fmt.Println(strings.Join(names, " "))
 		} else {
-			tabular.Print([]string{"Tag", "Repository", "Created"}, data)
+			if err := tabular.Print([]string{"Tag", "Repository", "Created"}, data); err != nil {
+				exit.Fatal(fmt.Errorf("list: %s", err))
+			}
 		}
 	},
 }

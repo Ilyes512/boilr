@@ -11,7 +11,6 @@ import (
 	"text/template"
 	"unicode/utf8"
 
-	"github.com/Masterminds/sprig"
 	"github.com/ryanuber/go-glob"
 
 	"github.com/Ilyes512/boilr/pkg/boilr"
@@ -54,7 +53,7 @@ func Get(path string) (Interface, error) {
 
 			return nil, err
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 
 		buf, err := io.ReadAll(f)
 		if err != nil {
@@ -97,7 +96,7 @@ func Get(path string) (Interface, error) {
 
 	return &dirTemplate{
 		Context:  ctxt,
-		FuncMap:  FuncMap,
+		FuncMap:  buildFuncMap(),
 		Path:     filepath.Join(absPath, boilr.TemplateDirName),
 		Metadata: md,
 	}, err
@@ -159,8 +158,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 		fnameTmpl := template.Must(template.
 			New("file name template").
 			Option(Options...).
-			Funcs(sprig.TxtFuncMap()).
-			Funcs(FuncMap).
+			Funcs(t.FuncMap).
 			Parse(oldName))
 
 		if err := fnameTmpl.Execute(buf, nil); err != nil {
@@ -192,14 +190,14 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			if err != nil {
 				return err
 			}
-			defer f.Close()
+			defer func() { _ = f.Close() }()
 
 			// Open original file and check if a binary file
 			origF, err := os.Open(filename)
 			if err != nil {
 				return err
 			}
-			defer origF.Close()
+			defer func() { _ = origF.Close() }()
 
 			isBin, err := isBinary(origF)
 			if err != nil {
@@ -223,7 +221,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 				}
 
 				if isOnlyWhitespace(contents) {
-					os.Remove(fname)
+					_ = os.Remove(fname)
 					return
 				}
 			}(f.Name())
@@ -231,8 +229,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			contentsTmpl := template.Must(template.
 				New("file contents template").
 				Option(Options...).
-				Funcs(sprig.TxtFuncMap()).
-				Funcs(FuncMap).
+				Funcs(t.FuncMap).
 				ParseFiles(filename))
 
 			fileTemplateName := filepath.Base(filename)

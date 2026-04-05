@@ -86,7 +86,7 @@ var Use = &cli.Command{
 			if err != nil {
 				return err
 			}
-			defer os.RemoveAll(tmpDir)
+			defer func() { _ = os.RemoveAll(tmpDir) }()
 
 			if err := tmpl.Execute(tmpDir); err != nil {
 				return err

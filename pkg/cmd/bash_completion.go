@@ -33,7 +33,7 @@ func configureBashCompletion() error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	bashrcText := `
 # Enables command-line completion for boilr
