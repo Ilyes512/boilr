@@ -6,16 +6,26 @@ import (
 
 	"github.com/fatih/color"
 	"github.com/olekukonko/tablewriter"
+	"github.com/olekukonko/tablewriter/renderer"
+	"github.com/olekukonko/tablewriter/tw"
 )
 
 // Print writes the given header and data in a tabular format to stdout.
 func Print(header []string, data [][]string) error {
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetCenterSeparator(color.GreenString("+"))
-	table.SetColumnSeparator(color.GreenString("|"))
-	table.SetRowSeparator(color.GreenString("-"))
+	symbols := tw.NewSymbolCustom("boilr").
+		WithCenter(color.GreenString("+")).
+		WithColumn(color.GreenString("|")).
+		WithRow(color.GreenString("-"))
 
-	table.SetHeader(header)
+	table := tablewriter.NewTable(os.Stdout,
+		tablewriter.WithRenderer(renderer.NewBlueprint(tw.Rendition{Symbols: symbols})),
+	)
+
+	headerAny := make([]any, len(header))
+	for i, h := range header {
+		headerAny[i] = h
+	}
+	table.Header(headerAny...)
 
 	for _, datum := range data {
 		datum[0] = color.RedString(datum[0])
@@ -26,14 +36,16 @@ func Print(header []string, data [][]string) error {
 			datum[1] = color.YellowString(datum[1])
 		}
 
-		table.Append(datum)
+		if err := table.Append(datum); err != nil {
+			return err
+		}
 	}
 
 	if len(data) == 0 {
-		table.Append([]string{"", "", ""})
+		if err := table.Append([]string{"", "", ""}); err != nil {
+			return err
+		}
 	}
 
-	table.Render()
-
-	return nil
+	return table.Render()
 }
