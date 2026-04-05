@@ -41,7 +41,7 @@ release:
     owner: Ilyes512
     name: boilr
 
-brews:
+homebrew_casks:
   -
     repository:
       owner: Ilyes512
@@ -49,12 +49,16 @@ brews:
     commit_author:
       name: ilyes[BOT]
       email: ilyes.ahidar@gmail.com
-    directory: Formula
+    directory: Casks
     homepage: https://github.com/Ilyes512/boilr
     description: "Boilerplate template manager that generates files or directories from template repositories"
     license: Apache-2.0
-    test: |
-      system "#{bin}/boilr --version"
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/boilr"]
+          end
 
 changelog:
   sort: asc
