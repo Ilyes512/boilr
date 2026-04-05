@@ -53,7 +53,7 @@ func Get(path string) (Interface, error) {
 
 			return nil, err
 		}
-		defer f.Close()
+		defer func() { _ = f.Close() }()
 
 		buf, err := io.ReadAll(f)
 		if err != nil {
@@ -190,14 +190,14 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 			if err != nil {
 				return err
 			}
-			defer f.Close()
+			defer func() { _ = f.Close() }()
 
 			// Open original file and check if a binary file
 			origF, err := os.Open(filename)
 			if err != nil {
 				return err
 			}
-			defer origF.Close()
+			defer func() { _ = origF.Close() }()
 
 			isBin, err := isBinary(origF)
 			if err != nil {
@@ -221,7 +221,7 @@ func (t *dirTemplate) Execute(dirPrefix string) error {
 				}
 
 				if isOnlyWhitespace(contents) {
-					os.Remove(fname)
+					_ = os.Remove(fname)
 					return
 				}
 			}(f.Name())

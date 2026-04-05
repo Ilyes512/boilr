@@ -83,7 +83,7 @@ func (r *boilrRegistry) formatFilesize(value interface{}) string {
 	var PB float64 = 1 << 50
 
 	filesizeFormat := func(filesize float64, suffix string) string {
-		return strings.Replace(fmt.Sprintf("%.1f %s", filesize, suffix), ".0", "", -1)
+		return strings.ReplaceAll(fmt.Sprintf("%.1f %s", filesize, suffix), ".0", "")
 	}
 
 	var result string

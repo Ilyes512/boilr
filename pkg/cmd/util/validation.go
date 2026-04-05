@@ -73,7 +73,7 @@ func testTemplate(path string) error {
 	if err != nil {
 		return err
 	}
-	defer os.RemoveAll(tmpDir)
+	defer func() { _ = os.RemoveAll(tmpDir) }()
 
 	tmpl, err := template.Get(path)
 	if err != nil {
