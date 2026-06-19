@@ -5,6 +5,12 @@
 
 ---
 
+> [!WARNING]
+> **This repository is archived and read-only. It has been replaced by [specsnl/specs-cli](https://github.com/specsnl/specs-cli).**
+> Please use the new repository going forward. Documentation is available at [cli.specs.dev](https://cli.specs.dev).
+
+---
+
 <p align="center">
 <a href="https://github.com/Ilyes512/boilr/actions/workflows/build.yml"><img alt="Build Boilr" src="https://github.com/Ilyes512/boilr/actions/workflows/build.yml/badge.svg" /></a>
 <a href="https://github.com/Ilyes512/boilr/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache%20License%202.0-E91E63.svg?style=flat-square" /></a>
